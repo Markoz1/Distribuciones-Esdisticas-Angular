@@ -11,16 +11,16 @@
 					</div>
 					<div class="panel-body">
 						<div class="row">
-							<form id="posinForm">
+							<form [formGroup]="poisonForm" (ngSubmit)="calcularFuncion()" >
 								<div class="form-group">
 									<label for="numero">número</label>
-									<input type="text" class="form-control" required>
+									<input type="number" name="numero" class="form-control" formControlName="numero" required>
 								</div>
 								<div class="form-group">
 									<label for="media">media</label>
-									<input type="text" class="form-control" required>
+									<input type="number" name="media" class="form-control" formControlName="media" required>
 								</div>
-								<button type="submit" (click)="calcularFuncion()" class="btn btn-default">calcular</button>
+								<button large type="submit" class="btn btn-default">calcular</button>
 							</form>
 						</div>
 					</div>
@@ -44,14 +44,11 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h3 class="panel-title">Grafico</h3>
-
-						<button class="btn-primary btn-block" routerLink="/lineal">ssssssssss</button>
-						<!-- probando la grafica-->
 					</div>
 					<div class="panel-body">
 						<div style="display: block;">
-							<canvas baseChart width="400" height="400" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
-							 [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" (chartClick)="chartClicked($event)">
+							<canvas baseChart [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
+							 [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType">
 							</canvas>
 						</div>
 					</div>

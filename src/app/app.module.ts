@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 
 //chartjs para las gráficas
 import { ChartsModule } from 'ng2-charts';
@@ -21,11 +22,12 @@ import { DistribucionComponent } from './distribucion/distribucion.component';
     SimulacionComponent,
     DistribucionComponent,
     LinealComponent
-  ],
+      ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ChartsModule,
+    ReactiveFormsModule
 
   ],
   providers: [],

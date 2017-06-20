@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { FormGroup, FormControl,ReactiveFormsModule } from '@angular/forms';
 import * as PD from '../../../node_modules/probability-distributions';
 import { Poisson } from './poisson/poisson';
 
@@ -9,22 +9,14 @@ import { Poisson } from './poisson/poisson';
   styleUrls: ['./distribucion.component.css']
 })
 export class DistribucionComponent implements OnInit {
+
   poisson: Poisson = {
     id: 1,
     name: 'probando poison'
   };
-  constructor() { }
 
-  calcularFuncion(poisonForm: String) {
+  public lineChartData: Array<any>;
 
-  }
-
-  ngOnInit() {
-  }
-
-  public lineChartData: Array<any> = [
-    { data: PD.rpois(100, 69), label: 'muestra' },
-  ];
   public lineChartLabels: Array<any> = ['Bueno', 'Muy Bueno', 'Sobresaliente', 'Exelente', 'Genio', 'Ingeniero', 'PhD'];
   public lineChartOptions: any = {
     responsive: true
@@ -57,6 +49,32 @@ export class DistribucionComponent implements OnInit {
   ];
   public lineChartLegend: boolean = true;
   public lineChartType: string = 'line';
+
+  constructor() {
+     this.lineChartData = [
+      { data: null, label: 'muestra' },]
+  }
+
+  poisonForm = new FormGroup({
+    numero: new FormControl(),
+    media: new FormControl(),
+  });
+
+  calcularFuncion() {
+    var a : number = this.poisonForm.value.numero;
+    var b : number = this.poisonForm.value.media;
+    this.crearLista(a, b);
+    this.randomize();
+  }
+  public crearLista(a: any, b: any) {
+    var varibles: any = PD.rpois(a, b);
+    this.lineChartData = [
+      { data: varibles, label: 'muestra' },]
+  }
+
+  ngOnInit() {
+  }
+
   public randomize(): void {
     let _lineChartData: Array<any> = new Array(this.lineChartData.length);
     for (let i = 0; i < this.lineChartData.length; i++) {
