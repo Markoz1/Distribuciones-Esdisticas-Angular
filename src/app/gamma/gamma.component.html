@@ -17,8 +17,12 @@
 									<input type="number" name="numero" class="form-control" formControlName="numero" step="any" required>
 								</div>
 								<div class="form-group">
-									<label for="media">media</label>
-									<input type="number" name="media" class="form-control" formControlName="media"  step="any" required>
+									<label for="media">condicion</label>
+									<input type="number" name="media" class="form-control" formControlName="condicion"  step="any" required>
+								</div>
+                <div class="form-group">
+									<label for="radio">Radio</label>
+									<input type="number" name="radio" class="form-control" formControlName="radio"  step="any" required>
 								</div>
 								<button large type="submit" class="btn btn-default">calcular</button>
 							</form>
@@ -34,7 +38,7 @@
 					<div class="panel-body">
 
 						<dl *ngFor="let d of lineChartData">
-							<li *ngFor="let label of lineChartLabels; let j=index">{{ d && d.data[j]}}</li>
+							<li *ngFor="let label of lineChartLabels; let j=index">{{d.data[j]}}</li>
 						</dl>
 
 					</div>
