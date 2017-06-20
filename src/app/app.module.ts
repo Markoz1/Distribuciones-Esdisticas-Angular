@@ -13,6 +13,8 @@ import { LinealComponent } from './lineal/lineal.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SimulacionComponent } from './simulacion/simulacion.component';
 import { DistribucionComponent } from './distribucion/distribucion.component';
+import { FDistribucionComponent } from './f-distribucion/f-distribucion.component';
+import { GammaComponent } from './gamma/gamma.component';
 
 @NgModule({
   declarations: [
@@ -21,14 +23,15 @@ import { DistribucionComponent } from './distribucion/distribucion.component';
     BodyComponent,
     SimulacionComponent,
     DistribucionComponent,
-    LinealComponent
-      ],
+    LinealComponent,
+    FDistribucionComponent,
+    GammaComponent 
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ChartsModule,
     ReactiveFormsModule
-
   ],
   providers: [],
   bootstrap: [AppComponent]
