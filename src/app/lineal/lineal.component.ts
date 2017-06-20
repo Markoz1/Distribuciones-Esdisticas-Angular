@@ -7,7 +7,6 @@ import * as PD from '../../../node_modules/probability-distributions';
 export class LinealComponent {
   // lineChart
   public lineChartData:Array<any> = [
-    //{data: [65, 59, 80, 81, 56, 55, 40], label: 'ISRAEL'},
     {data: PD.rf(20,2,3), label: 'ISRAEL'},
   ];
   public lineChartLabels:Array<any> = ['Bueno', 'Muy Bueno', 'Sobresaliente', 'Exelente', 'Genio', 'Ingeniero', 'PhD'];

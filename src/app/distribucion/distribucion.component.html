@@ -1,51 +1,62 @@
 <div class="container-fluid">
 	<div class="panel panel-primary">
-	  <div class="panel-heading">
-	    <h3 class="panel-title">Distribución {{nombre_simulacion}}</h3>
-	  </div>
-	  <div class="panel-body">
-	  	<div class="col-md-3">
-	  		<div class="panel panel-default">
-		  		<div class="panel-heading">
-				    <h3 class="panel-title">Parametros de entrada</h3>
-				</div>
-				<div class="panel-body">
-					<div class="row">
-						<div class="text-center">
-							{{poisson.name}}
-							<a href="javascript:void(0)" class="btn btn-primary">Iniciar</a>
+		<div class="panel-heading">
+			<h3 class="panel-title">Distribución {{nombre_simulacion}}</h3>
+		</div>
+		<div class="panel-body">
+			<div class="col-md-3">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">Parametros de entrada</h3>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<form id="posinForm">
+								<div class="form-group">
+									<label for="numero">número</label>
+									<input type="text" class="form-control" required>
+								</div>
+								<div class="form-group">
+									<label for="media">media</label>
+									<input type="text" class="form-control" required>
+								</div>
+								<button type="submit" (click)="calcularFuncion()" class="btn btn-default">calcular</button>
+							</form>
 						</div>
 					</div>
 				</div>
 			</div>
-	  	</div>
-		<div class="col-md-4">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-				    <h3 class="panel-title">Resultados</h3>
-				</div>
-				<div class="panel-body">
-					<p>
-						Resultados ...
-					</p>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-5">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-				    <h3 class="panel-title">Grafico</h3>
+			<div class="col-md-4">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">Resultados</h3>
+					</div>
+					<div class="panel-body">
 
-            <a class="btn-primary btn-block" routerLink="/lineal">sss</a>
-            <!-- probando la grafica-->
+						<dl *ngFor="let d of lineChartData">
+							<li *ngFor="let label of lineChartLabels; let j=index">{{d.data[j]}}</li>
+						</dl>
+
+					</div>
 				</div>
-				<div class="panel-body">
-					<p>
-						Grafico ...
-					</p>
+			</div>
+			<div class="col-md-5">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">Grafico</h3>
+
+						<button class="btn-primary btn-block" routerLink="/lineal">ssssssssss</button>
+						<!-- probando la grafica-->
+					</div>
+					<div class="panel-body">
+						<div style="display: block;">
+							<canvas baseChart width="400" height="400" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
+							 [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" (chartClick)="chartClicked($event)">
+							</canvas>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
-	  </div>
 	</div>
 </div>
