@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 //chartjs para las gráficas
 import { ChartsModule } from 'ng2-charts';
+
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { BodyComponent } from './body/body.component';
@@ -24,7 +25,8 @@ import { DistribucionComponent } from './distribucion/distribucion.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ChartsModule
+    ChartsModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]
