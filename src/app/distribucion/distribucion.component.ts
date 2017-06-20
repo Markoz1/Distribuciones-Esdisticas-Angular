@@ -52,7 +52,7 @@ export class DistribucionComponent implements OnInit {
 
   constructor() {
      this.lineChartData = [
-      { data: null, label: 'muestra' },]
+      { data: [], label: 'muestra' },]
   }
 
   poisonForm = new FormGroup({

@@ -14,11 +14,11 @@
 							<form [formGroup]="poisonForm" (ngSubmit)="calcularFuncion()" >
 								<div class="form-group">
 									<label for="numero">número</label>
-									<input type="number" name="numero" class="form-control" formControlName="numero" required>
+									<input type="number" name="numero" class="form-control" formControlName="numero" step="any" required>
 								</div>
 								<div class="form-group">
 									<label for="media">media</label>
-									<input type="number" name="media" class="form-control" formControlName="media" required>
+									<input type="number" name="media" class="form-control" formControlName="media"  step="any" required>
 								</div>
 								<button large type="submit" class="btn btn-default">calcular</button>
 							</form>
