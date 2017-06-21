@@ -14,7 +14,7 @@ export class DistribucionComponent implements OnInit {
     id: 1,
     name: 'probando poison'
   };
-
+  public prueba:Array<any>;
   public lineChartData: Array<any>;
 
   public lineChartLabels: Array<any> = ['Bueno', 'Muy Bueno', 'Sobresaliente', 'Exelente', 'Genio', 'Ingeniero', 'PhD'];
@@ -56,20 +56,20 @@ export class DistribucionComponent implements OnInit {
   }
 
   poisonForm = new FormGroup({
-    numero: new FormControl(),
-    media: new FormControl(),
+    numero: new FormControl(350),
+    media: new FormControl(10),
   });
 
   calcularFuncion() {
     var a : number = this.poisonForm.value.numero;
     var b : number = this.poisonForm.value.media;
     this.crearLista(a, b);
-    this.randomize();
   }
   public crearLista(a: any, b: any) {
-    var varibles: any = PD.rpois(a, b);
+    var variables: any = PD.rpois(a, b);
     this.lineChartData = [
-      { data: varibles, label: 'muestra' },]
+      { data: variables, label: 'muestra' },]
+    this.prueba= PD.rpois(a, b);
   }
 
   ngOnInit() {
