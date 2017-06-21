@@ -49,19 +49,22 @@ export class FDistribucionComponent implements OnInit {
       { data: [], label: 'muestra' },]
   }
 
-  poisonForm = new FormGroup({
+  f_Form = new FormGroup({
     numero: new FormControl(),
-    media: new FormControl(),
+    g1 : new FormControl(),
+    g2 : new FormControl(),
+
   });
 
   calcularFuncion() {
-    var a : number = this.poisonForm.value.numero;
-    var b : number = this.poisonForm.value.media;
-    this.crearLista(a, b);
+    var a : number = this.f_Form.value.numero;
+    var b : number = this.f_Form.value.g1;
+    var c : number = this.f_Form.value.g2;
+    this.crearLista(a, b, c);
     this.randomize();
   }
-  public crearLista(a: any, b: any) {
-    var varibles: any = PD.rexp(a, b);  
+  public crearLista(a: any, b: any , c: any) {
+    var varibles: any = PD.rf(a, b, c);
     this.lineChartData = [
       { data: varibles, label: 'muestra' },]
   }

@@ -60,10 +60,10 @@ export class GammaComponent implements OnInit {
     var b : number = this.gammaForm.value.condicion;
     var c : number = this.gammaForm.value.radio;
     this.crearLista(a, b, c);
-    this.randomize();
+
   }
   public crearLista(a: any, b: any, c: any) {
-    var varibles: any = PD.rgamma(a, b, c);  
+    var varibles: any = PD.rgamma(a, b, c);
     this.lineChartData = [
       { data: varibles, label: 'muestra' },]
   }

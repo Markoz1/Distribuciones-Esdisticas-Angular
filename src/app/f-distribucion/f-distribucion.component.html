@@ -1,3 +1,63 @@
-<p>
-  f-distribucion works!
-</p>
+<div class="container-fluid">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">Distribución {{nombre_simulacion}}</h3>
+    </div>
+    <div class="panel-body">
+      <div class="col-md-3">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Parametros de entrada</h3>
+          </div>
+          <div class="panel-body">
+            <div class="row">
+              <form [formGroup]="f_Form" (ngSubmit)="calcularFuncion()" >
+                <div class="form-group">
+                  <label for="numero">número</label>
+                  <input type="number" name="numero" class="form-control" formControlName="numero" step="any" required>
+                </div>
+                <div class="form-group">
+                  <label for="g1">grados de libertad 1</label>
+                  <input type="number" name="g1" class="form-control" formControlName="g1"  step="any" required>
+                </div>
+                <div class="form-group">
+                  <label for="g2">grados de libertad 2</label>
+                  <input type="number" name="g2" class="form-control" formControlName="g2"  step="any" required>
+                </div>
+                <button large type="submit" class="btn btn-default">calcular</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Resultados</h3>
+          </div>
+          <div class="panel-body">
+
+            <dl *ngFor="let d of lineChartData">
+              <li *ngFor="let label of lineChartLabels; let j=index">{{d.data[j]}}</li>
+            </dl>
+
+          </div>
+        </div>
+      </div>
+      <div class="col-md-5">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Grafico</h3>
+          </div>
+          <div class="panel-body">
+            <div style="display: block;">
+              <canvas baseChart [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
+                      [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType">
+              </canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
