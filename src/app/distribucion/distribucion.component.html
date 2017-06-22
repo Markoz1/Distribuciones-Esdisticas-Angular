@@ -1,7 +1,8 @@
+<div *ngIf="distribucion">
 <div class="container-fluid">
 	<div class="panel panel-primary">
 		<div class="panel-heading">
-			<h3 class="panel-title">Distribución {{nombre_simulacion}}</h3>
+			<h3 class="panel-title">Distribución {{distribucion.titulo}}</h3>
 		</div>
 		<div class="panel-body">
 			<div class="col-md-3">
@@ -10,22 +11,55 @@
 						<h3 class="panel-title">Parametros de entrada</h3>
 					</div>
 					<div class="panel-body">
-						<div class="">
-							<form [formGroup]="poisonForm" (ngSubmit)="calcularFuncion()" >
+						<form [formGroup]="formulario" (ngSubmit)="calcularFuncion()" >
 								<div class="form-group">
-									<label for="numero">número</label>
+									<label for="numero">Número</label>
 									<input type="number" name="numero" class="form-control" formControlName="numero" step="any" required>
-								</div>
+								</div>					
+							<!--Formulario Poisson-->							
+							<div *ngIf="id == 1">								
 								<div class="form-group">
-									<label for="media">media</label>
+									<label for="media">Media</label>
+									<input type="number" name="media" class="form-control" formControlName="media"  step="any" required>
+								</div>								
+							</div>
+							<!--Formulario Normal-->
+							<div *ngIf="id == 2">
+								<div class="form-group">
+									<label for="media">Media</label>
 									<input type="number" name="media" class="form-control" formControlName="media"  step="any" required>
 								</div>
-                <div class="text-center">
-                  <button large type="submit" class="btn btn-primary">calcular</button>
-                </div>
+								<div class="form-group">
+									<label for="sd">Desviación Estandar</label>
+									<input type="number" name="sd" class="form-control" formControlName="sd"  step="any" required>
+								</div>									
+							</div>							
+							<!--Formulario Gamma-->
+							<div *ngIf="id == 3">
+								<div class="form-group">
+									<label for="forma">Forma</label>
+									<input type="number" name="forma" class="form-control" formControlName="forma"  step="any" required>
+								</div>
+								<div class="form-group">
+									<label for="escala">Escala</label>
+									<input type="number" name="escala" class="form-control" formControlName="escala"  step="any" required>
+								</div>	
+							</div>
+							<!--Formulario Exponencial-->
+							<div *ngIf="id == 4">
+								<div class="form-group">
+									<label for="escala">Escala</label>
+									<input type="number" name="escala" class="form-control" formControlName="escala"  step="any" required>
+								</div>	
+							</div>
+							<div *ngIf="id == 5">
 
-							</form>
+							</div>
+							<!--falta hasta id 9-->
+						<div class="text-center">
+							<button large type="submit" class="btn btn-primary">calcular</button>
 						</div>
+						</form>
 					</div>
 				</div>
 			</div>
@@ -50,8 +84,7 @@
 					</div>
 					<div class="panel-body">
             <div class="">
-
-             <textarea class="form-control" rows="15" id="textArea">{{prueba}} </textarea>
+             <textarea class="form-control" rows="15" id="textArea">{{datos}} </textarea>
             </div>
 					</div>
 				</div>
@@ -59,3 +92,4 @@
 		</div>
 	</div>
 </div>
+</div> <!--final ngIf distribucion-->

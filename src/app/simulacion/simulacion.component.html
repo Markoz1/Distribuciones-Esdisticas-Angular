@@ -6,19 +6,19 @@
 		  	</div>
 			<div class="panel-body">
 				<div class="btn-group btn-group-justified">
-					<a routerLink="/simulacion/distribucion" class="btn btn-lg btn-primary">Poisson</a>
-					<a routerLink="/simulacion/distribucion" class="btn btn-lg btn-primary">Normal</a>
-					<a routerLink="/simulacion/gamma" class="btn btn-lg btn-primary">Gamma</a>
+					<a [routerLink]="['/simulacion/distribucion', 1]" class="btn btn-lg btn-primary">Poisson</a>
+					<a [routerLink]="['/simulacion/distribucion', 2]" class="btn btn-lg btn-primary">Normal</a>
+					<a [routerLink]="['/simulacion/distribucion', 3]" class="btn btn-lg btn-primary">Gamma</a>
 				</div>
 				<div class="btn-group btn-group-justified">
-					<a routerLink="/simulacion/distribucion" class="btn btn-lg btn-primary">Exponencial</a>
-					<a routerLink="/simulacion/f" class="btn btn-lg btn-primary">F</a>
-					<a routerLink="/simulacion/distribucion" class="btn btn-lg btn-primary">Beta</a>
+					<a [routerLink]="['/simulacion/distribucion', 4]" class="btn btn-lg btn-primary">Exponencial</a>
+					<a [routerLink]="['/simulacion/distribucion', 5]" class="btn btn-lg btn-primary">F</a>
+					<a [routerLink]="['/simulacion/distribucion', 6]" class="btn btn-lg btn-primary">Beta</a>
 				</div>
 				<div class="btn-group btn-group-justified">
-					<a routerLink="/simulacion/distribucion" class="btn btn-lg btn-primary">Normal-log</a>
-					<a routerLink="/simulacion/distribucion" class="btn btn-lg btn-primary">T de Student</a>
-					<a routerLink="/simulacion/distribucion" class="btn btn-lg btn-primary">Empírica</a>
+					<a [routerLink]="['/simulacion/distribucion', 7]" class="btn btn-lg btn-primary">Normal-log</a>
+					<a [routerLink]="['/simulacion/distribucion', 8]" class="btn btn-lg btn-primary">T de Student</a>
+					<a [routerLink]="['/simulacion/distribucion', 9]" class="btn btn-lg btn-primary">Empírica</a>
 				</div>
 			</div>
 		</div>
