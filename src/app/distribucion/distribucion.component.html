@@ -11,13 +11,13 @@
 						<h3 class="panel-title">Parametros de entrada</h3>
 					</div>
 					<div class="panel-body">
-						<form [formGroup]="formulario" (ngSubmit)="calcularFuncion()" >					
-							<!--Formulario Poisson-->							
-							<div *ngIf="id == 1">
+						<form [formGroup]="formulario" (ngSubmit)="calcularFuncion()" >
 								<div class="form-group">
 									<label for="numero">Número</label>
 									<input type="number" name="numero" class="form-control" formControlName="numero" step="any" required>
-								</div>
+								</div>					
+							<!--Formulario Poisson-->							
+							<div *ngIf="id == 1">								
 								<div class="form-group">
 									<label for="media">Media</label>
 									<input type="number" name="media" class="form-control" formControlName="media"  step="any" required>
@@ -25,10 +25,6 @@
 							</div>
 							<!--Formulario Normal-->
 							<div *ngIf="id == 2">
-								<div class="form-group">
-									<label for="numero">Número</label>
-									<input type="number" name="numero" class="form-control" formControlName="numero" step="any" required>
-								</div>
 								<div class="form-group">
 									<label for="media">Media</label>
 									<input type="number" name="media" class="form-control" formControlName="media"  step="any" required>
@@ -41,10 +37,6 @@
 							<!--Formulario Gamma-->
 							<div *ngIf="id == 3">
 								<div class="form-group">
-									<label for="numero">Número</label>
-									<input type="number" name="numero" class="form-control" formControlName="numero" step="any" required>
-								</div>
-								<div class="form-group">
 									<label for="forma">Forma</label>
 									<input type="number" name="forma" class="form-control" formControlName="forma"  step="any" required>
 								</div>
@@ -56,14 +48,14 @@
 							<!--Formulario Exponencial-->
 							<div *ngIf="id == 4">
 								<div class="form-group">
-									<label for="numero">Número</label>
-									<input type="number" name="numero" class="form-control" formControlName="numero" step="any" required>
-								</div>
-								<div class="form-group">
 									<label for="escala">Escala</label>
 									<input type="number" name="escala" class="form-control" formControlName="escala"  step="any" required>
 								</div>	
 							</div>
+							<div *ngIf="id == 5">
+
+							</div>
+							<!--falta hasta id 9-->
 						<div class="text-center">
 							<button large type="submit" class="btn btn-primary">calcular</button>
 						</div>
@@ -92,7 +84,6 @@
 					</div>
 					<div class="panel-body">
             <div class="">
-
              <textarea class="form-control" rows="15" id="textArea">{{datos}} </textarea>
             </div>
 					</div>

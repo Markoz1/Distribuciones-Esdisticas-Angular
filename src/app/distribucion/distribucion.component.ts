@@ -109,14 +109,9 @@ export class DistribucionComponent implements OnInit {
       this.crearGrafico(PD.rexp(a, b));
       console.log(a,b);
     }
+    // falta hasta el is 9
   }
  
-  public crearGrafico(datos:any[]) {
-    this.lineChartData = [
-      { data: datos, label: 'muestra' },]
-    this.datos= datos;
-  } 
-
   public llenarFormulario(){
     if (this.id == 1) {// poison
       this.formulario= new FormGroup({
@@ -143,8 +138,15 @@ export class DistribucionComponent implements OnInit {
       numero: new FormControl(this.distribucion.getDatos()[0]),
       escala: new FormControl(this.distribucion.getDatos()[1]),
       });
-    }     
+    }
+    // falta hasta el is 9     
   }
+
+  public crearGrafico(datos:any[]) {
+    this.lineChartData = [
+      { data: datos, label: 'muestra' },]
+    this.datos= datos;
+  } 
   public randomize(): void {
     let _lineChartData: Array<any> = new Array(this.lineChartData.length);
     for (let i = 0; i < this.lineChartData.length; i++) {
@@ -159,5 +161,4 @@ export class DistribucionComponent implements OnInit {
   public chartClicked(e: any): void {
     console.log(e);
   }
-
 }

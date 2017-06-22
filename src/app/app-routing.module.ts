@@ -11,8 +11,7 @@ import { LinealComponent } from './lineal/lineal.component';
 const routes: Routes = [
   { path: '',  component: BodyComponent },
   { path: 'simulacion',  component: SimulacionComponent },
-  { path: 'simulacion/distribucion/:id',  component: DistribucionComponent },
-  { path: 'lineal',  component: LinealComponent }
+  { path: 'simulacion/distribucion/:id',  component: DistribucionComponent }
 ];
  
 @NgModule({
