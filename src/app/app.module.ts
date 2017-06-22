@@ -13,8 +13,7 @@ import { LinealComponent } from './lineal/lineal.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SimulacionComponent } from './simulacion/simulacion.component';
 import { DistribucionComponent } from './distribucion/distribucion.component';
-import { FDistribucionComponent } from './f-distribucion/f-distribucion.component';
-import { GammaComponent } from './gamma/gamma.component';
+import { DistribucionService } from './distribucion/distribucion.service';
 
 @NgModule({
   declarations: [
@@ -23,9 +22,7 @@ import { GammaComponent } from './gamma/gamma.component';
     BodyComponent,
     SimulacionComponent,
     DistribucionComponent,
-    LinealComponent,
-    FDistribucionComponent,
-    GammaComponent 
+    LinealComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +30,7 @@ import { GammaComponent } from './gamma/gamma.component';
     ChartsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [DistribucionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
