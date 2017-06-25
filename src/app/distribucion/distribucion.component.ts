@@ -1,9 +1,9 @@
 // import 'rxjs/add/operator/switchMap';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl,ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import * as PD from '../../../node_modules/probability-distributions';
 
-import { ActivatedRoute, Params }   from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 
 import { Distribucion } from './distribucion';
 import { DISTRIBUCIONES } from './lista-distribucion';
@@ -16,10 +16,10 @@ import { DistribucionService } from './distribucion.service';
 })
 export class DistribucionComponent implements OnInit {
   public distribuciones: Distribucion[] = DISTRIBUCIONES;
-  public distribucion:Distribucion;
-  public datos:any[];
+  public distribucion: Distribucion;
+  public datos: any[];
   public lineChartData: Array<any>;
-  public id:number;
+  public id: number;
   public lineChartLabels: Array<any> = ['Bueno', 'Muy Bueno', 'Sobresaliente', 'Exelente', 'Genio', 'Ingeniero', 'PhD'];
   public lineChartOptions: any = {
     responsive: true
@@ -54,8 +54,8 @@ export class DistribucionComponent implements OnInit {
   public lineChartType: string = 'line';
   public formulario;
   constructor(private distribucionService: DistribucionService, private route: ActivatedRoute) {
-     this.lineChartData = [
-      { data: [], label: 'muestra' },]      
+    this.lineChartData = [
+      { data: [], label: 'muestra' },]
   }
   ngOnInit() {
     // this.getDistribuciones();
@@ -69,14 +69,14 @@ export class DistribucionComponent implements OnInit {
         .then(distribucion => this.distribucion = distribucion);
     });
     this.route.params.subscribe(params => {
-      if(params['id']!=null){
-          this.id = +params['id']; 
+      if (params['id'] != null) {
+        this.id = +params['id'];
       }
     });
-    console.log(this.id);  
+    console.log(this.id);
     console.log(this.distribuciones);
     console.log(this.distribucion);
-    this.distribucion = this.distribuciones[this.id-1];
+    this.distribucion = this.distribuciones[this.id - 1];
     console.log(this.distribucion);
     console.log(this.distribucion.getDatos());
     this.llenarFormulario();
@@ -84,81 +84,154 @@ export class DistribucionComponent implements OnInit {
 
   public calcularFuncion() {
     if (this.id == 1) { // poison
-      var a : number = this.formulario.value.numero;
-      var b : number = this.formulario.value.media;
+      var a: number = this.formulario.value.numero;
+      var b: number = this.formulario.value.media;
       this.crearGrafico(PD.rpois(a, b));
-      console.log(a,b);
+      console.log(a, b);
     }
     if (this.id == 2) { // normal
-      var a : number = this.formulario.value.numero;
-      var b : number = this.formulario.value.media;
-      var c : number = this.formulario.value.sd;
+      var a: number = this.formulario.value.numero;
+      var b: number = this.formulario.value.media;
+      var c: number = this.formulario.value.sd;
       this.crearGrafico(PD.rnorm(a, b, c));
-      console.log(a,b,c);
+      console.log(a, b, c);
     }
     if (this.id == 3) { // Gamma
-      var a : number = this.formulario.value.numero;
-      var b : number = this.formulario.value.forma;
-      var c : number = this.formulario.value.escala;
+      var a: number = this.formulario.value.numero;
+      var b: number = this.formulario.value.forma;
+      var c: number = this.formulario.value.escala;
       this.crearGrafico(PD.rgamma(a, b, c));
-      console.log(a,b,c);
+      console.log(a, b, c);
     }
     if (this.id == 4) { // Exponencial
-      var a : number = this.formulario.value.numero;
-      var b : number = this.formulario.value.escala;
+      var a: number = this.formulario.value.numero;
+      var b: number = this.formulario.value.escala;
       this.crearGrafico(PD.rexp(a, b));
-      console.log(a,b);
+      console.log(a, b);
     }
-    // falta hasta el is 9
+    if (this.id == 5) { // f
+      var a: number = this.formulario.value.numero;
+      var b: number = this.formulario.value.g1;
+      var c: number = this.formulario.value.g2;
+      this.crearGrafico(PD.rf(a, b, c));
+      console.log(a, b, c);
+    }
+    if (this.id == 6) { // f
+      var a: number = this.formulario.value.numero;
+      var b: number = this.formulario.value.alfa;
+      var c: number = this.formulario.value.beta;
+      var d: number = this.formulario.value.localizacion;
+      this.crearGrafico(PD.rbeta(a, b, c, d));
+      console.log(a, b, c, d);
+    }
+    if (this.id == 7) { // logaritmica normal
+      var a: number = this.formulario.value.numero;
+      var b: number = this.formulario.value.Ml;
+      var c: number = this.formulario.value.De;
+      this.crearGrafico(PD.rlnorm(a, b, c));
+      console.log(a, b, c);
+    }
+    if (this.id == 8) { // t student
+      var a: number = this.formulario.value.numero;
+      var b: number = this.formulario.value.Ml;
+      var c: number = this.formulario.value.De;
+      this.crearGrafico(PD.rlnorm(a, b, c));
+      console.log(a, b, c);
+    }
+    if (this.id == 9) { // empirica
+      var a: number = this.formulario.value.numero;
+      var b: number = this.formulario.value.Ml;
+      var c: number = this.formulario.value.De;
+      this.crearGrafico(PD.rlnorm(a, b, c));
+      console.log(a, b, c);
+    }
   }
- 
-  public llenarFormulario(){
+
+  public llenarFormulario() {
     if (this.id == 1) {// poison
-      this.formulario= new FormGroup({
-      numero: new FormControl(this.distribucion.getDatos()[0]),
-      media: new FormControl(this.distribucion.getDatos()[1]),
+      this.formulario = new FormGroup({
+        numero: new FormControl(this.distribucion.getDatos()[0]),
+        media: new FormControl(this.distribucion.getDatos()[1]),
       });
     }
     if (this.id == 2) {// normal
-      this.formulario= new FormGroup({
-      numero: new FormControl(this.distribucion.getDatos()[0]),
-      media: new FormControl(this.distribucion.getDatos()[1]),
-      sd: new FormControl(this.distribucion.getDatos()[2]),
+      this.formulario = new FormGroup({
+        numero: new FormControl(this.distribucion.getDatos()[0]),
+        media: new FormControl(this.distribucion.getDatos()[1]),
+        sd: new FormControl(this.distribucion.getDatos()[2]),
       });
-    } 
+    }
     if (this.id == 3) { // Gamma
-      this.formulario= new FormGroup({
-      numero: new FormControl(this.distribucion.getDatos()[0]),
-      forma: new FormControl(this.distribucion.getDatos()[1]),
-      escala: new FormControl(this.distribucion.getDatos()[2]),
+      this.formulario = new FormGroup({
+        numero: new FormControl(this.distribucion.getDatos()[0]),
+        forma: new FormControl(this.distribucion.getDatos()[1]),
+        escala: new FormControl(this.distribucion.getDatos()[2]),
       });
-    } 
+    }
     if (this.id == 4) { // Exponencial
-      this.formulario= new FormGroup({
-      numero: new FormControl(this.distribucion.getDatos()[0]),
-      escala: new FormControl(this.distribucion.getDatos()[1]),
+      this.formulario = new FormGroup({
+        numero: new FormControl(this.distribucion.getDatos()[0]),
+        escala: new FormControl(this.distribucion.getDatos()[1]),
       });
     }
-    // falta hasta el is 9     
-  }
-
-  public crearGrafico(datos:any[]) {
-    this.lineChartData = [
-      { data: datos, label: 'muestra' },]
-    this.datos= datos;
-  } 
-  public randomize(): void {
-    let _lineChartData: Array<any> = new Array(this.lineChartData.length);
-    for (let i = 0; i < this.lineChartData.length; i++) {
-      _lineChartData[i] = { data: new Array(this.lineChartData[i].data.length), label: this.lineChartData[i].label };
-      for (let j = 0; j < this.lineChartData[i].data.length; j++) {
-        _lineChartData[i].data[j] = Math.floor((Math.random() * 100) + 1);
-      }
+    if (this.id == 5) { // f
+      this.formulario = new FormGroup({
+        numero: new FormControl(this.distribucion.getDatos()[0]),
+        g1: new FormControl(this.distribucion.getDatos()[1]),
+        g2: new FormControl(this.distribucion.getDatos()[2]),
+      });
     }
-    this.lineChartData = _lineChartData;
+    if (this.id == 6) { // beta
+      this.formulario = new FormGroup({
+        numero: new FormControl(this.distribucion.getDatos()[0]),
+        alfa: new FormControl(this.distribucion.getDatos()[1]),
+        beta: new FormControl(this.distribucion.getDatos()[2]),
+        localizacion: new FormControl(this.distribucion.getDatos()[3]),
+      })
+    }
+    if (this.id == 7) { // log-norm
+      this.formulario = new FormGroup({
+        numero: new FormControl(this.distribucion.getDatos()[0]),
+        Ml: new FormControl(this.distribucion.getDatos()[1]),
+        De: new FormControl(this.distribucion.getDatos()[2]),
+      });
+    }
+    if (this.id == 8) { // tstudent
+      this.formulario = new FormGroup({
+        numero: new FormControl(this.distribucion.getDatos()[0]),
+        Ml: new FormControl(this.distribucion.getDatos()[1]),
+        De: new FormControl(this.distribucion.getDatos()[2]),
+      });
+    }
+    if (this.id == 9) { // empirica
+      this.formulario = new FormGroup({
+        numero: new FormControl(this.distribucion.getDatos()[0]),
+        Ml: new FormControl(this.distribucion.getDatos()[1]),
+        De: new FormControl(this.distribucion.getDatos()[2]),
+      });   
   }
+}
+
+  public crearGrafico(datos: any[]) {
+  this.lineChartData = [
+    { data: datos, label: 'muestra' },]
+  this.datos = datos;
+}
+  public randomize(): void {
+  let _lineChartData: Array<any> = new Array(this.lineChartData.length);
+  for(let i = 0; i < this.lineChartData.length; i++) {
+    _lineChartData[i] = {
+      data: new Array(this.lineChartData[i].data.length),
+      label: this.lineChartData[i].label
+    };
+    for (let j = 0; j < this.lineChartData[i].data.length; j++) {
+      _lineChartData[i].data[j] = Math.floor((Math.random() * 100) + 1);
+    }
+  }
+    this.lineChartData = _lineChartData;
+}
   // events
   public chartClicked(e: any): void {
-    console.log(e);
-  }
+  console.log(e);
+}
 }
