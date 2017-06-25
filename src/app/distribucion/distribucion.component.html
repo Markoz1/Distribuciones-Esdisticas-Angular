@@ -1,107 +1,141 @@
 <div *ngIf="distribucion">
-<div class="container-fluid">
-	<div class="panel panel-primary">
-		<div class="panel-heading">
-			<h3 class="panel-title">Distribución {{distribucion.titulo}}</h3>
-		</div>
-		<div class="panel-body">
-			<div class="row">	
-			<div class="col-md-3">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">Parametros de entrada</h3>
-					</div>
-					<div class="panel-body">
-						<div class="row">
-							<div class="col-md-10 col-md-offset-1">
-								<form [formGroup]="formulario" (ngSubmit)="calcularFuncion()" >
-										<div class="form-group">
-											<label for="numero">Número</label>
-											<input type="number" name="numero" class="form-control" formControlName="numero" step="any" required>
-										</div>					
-									<!--Formulario Poisson-->							
-									<div *ngIf="id == 1">								
-										<div class="form-group">
-											<label for="media">Media</label>
-											<input type="number" name="media" class="form-control" formControlName="media"  step="any" required>
-										</div>								
-									</div>
-									<!--Formulario Normal-->
-									<div *ngIf="id == 2">
-										<div class="form-group">
-											<label for="media">Media</label>
-											<input type="number" name="media" class="form-control" formControlName="media"  step="any" required>
-										</div>
-										<div class="form-group">
-											<label for="sd">Desviación Estandar</label>
-											<input type="number" name="sd" class="form-control" formControlName="sd"  step="any" required>
-										</div>									
-									</div>							
-									<!--Formulario Gamma-->
-									<div *ngIf="id == 3">
-										<div class="form-group">
-											<label for="forma">Forma</label>
-											<input type="number" name="forma" class="form-control" formControlName="forma"  step="any" required>
-										</div>
-										<div class="form-group">
-											<label for="escala">Escala</label>
-											<input type="number" name="escala" class="form-control" formControlName="escala"  step="any" required>
-										</div>	
-									</div>
-									<!--Formulario Exponencial-->
-									<div *ngIf="id == 4">
-										<div class="form-group">
-											<label for="escala">Escala</label>
-											<input type="number" name="escala" class="form-control" formControlName="escala"  step="any" required>
-										</div>	
-									</div>
-									<div *ngIf="id == 5">
-
-									</div>
-									<!--falta hasta id 9-->
-									<div class="text-center">
-										<button large type="submit" class="btn btn-primary">calcular</button>
-									</div>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
+	<div class="container-fluid">
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<h3 class="panel-title">Distribución {{distribucion.titulo}}</h3>
 			</div>
-      <div class="col-md-5">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">Grafico</h3>
-          </div>
-          <div class="panel-body">
-						<div class="">
-							<div class="">
-								<div style="display: block;">
-									<canvas baseChart [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
-													[colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType">
-									</canvas>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-md-3">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title">Parametros de entrada</h3>
+							</div>
+							<div class="panel-body">
+								<div class="row">
+									<div class="col-md-10 col-md-offset-1">
+										<form [formGroup]="formulario" (ngSubmit)="calcularFuncion()">
+											<div class="form-group">
+												<label for="numero">Número</label>
+												<input type="number" name="numero" class="form-control" formControlName="numero" step="any" required>
+											</div>
+											<!--Formulario Poisson-->
+											<div *ngIf="id == 1">
+												<div class="form-group">
+													<label for="media">Media</label>
+													<input type="number" name="media" class="form-control" formControlName="media" step="any" required>
+												</div>
+											</div>
+											<!--Formulario Normal-->
+											<div *ngIf="id == 2">
+												<div class="form-group">
+													<label for="media">Media</label>
+													<input type="number" name="media" class="form-control" formControlName="media" step="any" required>
+												</div>
+												<div class="form-group">
+													<label for="sd">Desviación Estandar</label>
+													<input type="number" name="sd" class="form-control" formControlName="sd" step="any" required>
+												</div>
+											</div>
+											<!--Formulario Gamma-->
+											<div *ngIf="id == 3">
+												<div class="form-group">
+													<label for="forma">Forma</label>
+													<input type="number" name="forma" class="form-control" formControlName="forma" step="any" required>
+												</div>
+												<div class="form-group">
+													<label for="escala">Escala</label>
+													<input type="number" name="escala" class="form-control" formControlName="escala" step="any" required>
+												</div>
+											</div>
+											<!--Formulario Exponencial-->
+											<div *ngIf="id == 4">
+												<div class="form-group">
+													<label for="escala">Escala</label>
+													<input type="number" name="escala" class="form-control" formControlName="escala" step="any" required>
+												</div>
+											</div>
+											<!--Formulario f-->
+											<div *ngIf="id == 5">
+												<div class="form-group">
+													<label for="g1">Grados de libertad 1</label>
+													<input type="number" name="g1" class="form-control" formControlName="g1" step="any" required>
+												</div>
+												<div class="form-group">
+													<label for="g2">Grados de libertad 2</label>
+													<input type="number" name="g2" class="form-control" formControlName="g2" step="any" required>
+												</div>
+											</div>
+											<!--Formulario  beta-->
+											<div *ngIf="id == 6">
+												<div class="form-group">
+													<label for="alfa">alfa</label>
+													<input type="number" name="alfa" class="form-control" formControlName="alfa" step="any" required>
+												</div>
+												<div class="form-group">
+													<label for="beta">beta</label>
+													<input type="number" name="beta" class="form-control" formControlName="beta" step="any" required>
+												</div>
+												<div class="form-group">
+													<label for="localizacion">localizacionr</label>
+													<input type="number" name="localizacion" class="form-control" formControlName="localizacion" step="any" required>
+												</div>
+											</div>
+											<!--Formulario log normal-->
+											<div *ngIf="id == 7">
+												<div class="form-group">
+													<label for="Ml">Media Loraritmica</label>
+													<input type="number" name="Ml" class="form-control" formControlName="Ml" step="any" required>
+												</div>
+												<div class="form-group">
+													<label for="De">Desviación Estandar</label>
+													<input type="number" name="De" class="form-control" formControlName="De" step="any" required>
+												</div>
+											</div>
+											<div class="text-center">
+												<button large type="submit" class="btn btn-primary">calcular</button>
+											</div>
+										</form>
+									</div>
 								</div>
 							</div>
 						</div>
-          </div>
-        </div>
-      </div>
-			<div class="col-md-4">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">Resultados</h3>
 					</div>
-					<div class="panel-body">
-            <div class="row">
-             	<div class="col-md-10 col-md-offset-1">
-								 <textarea class="form-control" rows="15" id="textArea">{{datos}} </textarea>
+					<div class="col-md-5">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title">Grafico</h3>
 							</div>
-            </div>
+							<div class="panel-body">
+								<div class="">
+									<div class="">
+										<div style="display: block;">
+											<canvas baseChart [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors"
+											 [legend]="lineChartLegend" [chartType]="lineChartType">
+											</canvas>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title">Resultados</h3>
+							</div>
+							<div class="panel-body">
+								<div class="row">
+									<div class="col-md-10 col-md-offset-1">
+										<textarea class="form-control" rows="15" id="textArea"> {{datos}} </textarea>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>	
 		</div>
 	</div>
 </div>
-</div> <!--final ngIf distribucion-->
+<!--final ngIf distribucion-->
