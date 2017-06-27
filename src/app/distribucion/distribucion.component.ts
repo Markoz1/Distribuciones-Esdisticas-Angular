@@ -25,6 +25,7 @@ export class DistribucionComponent implements OnInit {
   public lineChartData: Array<any>;
   public id: number;
   public lineChartLabels: Array<any>;
+  public arreglo : any[];
   public lineChartOptions: any = {
     responsive: true
   };
@@ -80,51 +81,56 @@ export class DistribucionComponent implements OnInit {
     this.llenarFormulario();
   }
 
+  public quitarRepeticion(arreglo: any[]){
+  let ejeX = ordenar(Unico.unique(arreglo));
+  let ejeY = new Array<any>(ejeX.length);
+    for (let x = 0; x < arreglo.length; x++) {
+      ejeY[x] = (Repeticiones(arreglo, ejeX[x]));
+    }
+    this.crearGrafico(ejeY, ejeX , arreglo);
+  }
+
   public calcularFuncion() {
-    if (this.lineChartLabels.length > 0) {
+    if (this.lineChartLabels.length > 0 && this.arreglo.length > 0) {
       this.lineChartLabels = [];
       this.lineChartData = [];
+      this.arreglo = [];
     }
     if (this.id == 1) { // poison
       var a: number = this.formulario.value.numero;
       var b: number = this.formulario.value.media;
-      let arreglo = this.generarPuntos(this.id, a, b);
-      let ejeX = ordenar(Unico.unique(arreglo));
-      let ejeY = new Array<any>(ejeX.length);
-      for (let x = 0; x < arreglo.length; x++) {
-        ejeY[x] = (Repeticiones(arreglo, ejeX[x]));
-      }
-
-      for (let i = 0; i < ejeX.length; i++) {
-        this.lineChartLabels.push(ejeX[i]);
-      }
-      this.crearGrafico(ejeY, arreglo);
+      this.arreglo = this.generarPuntos(this.id, a, b);
+      this.quitarRepeticion(this.arreglo);
     }
     if (this.id == 2) { // normal
       var a: number = this.formulario.value.numero;
       var b: number = this.formulario.value.media;
       var c: number = this.formulario.value.sd;
-      // this.crearGrafico(this.generarPuntos(this.id,a,b,c));
+      this.arreglo = this.generarPuntos(this.id,a,b,c);
+      this.quitarRepeticion(this.arreglo);
       console.log(a, b, c);
     }
     if (this.id == 3) { // Gamma
       var a: number = this.formulario.value.numero;
       var b: number = this.formulario.value.forma;
       var c: number = this.formulario.value.escala;
-      //this.crearGrafico(this.generarPuntos(this.id,a,b,c));
+      this.arreglo =this.generarPuntos(this.id,a,b,c);
+      this.quitarRepeticion(this.arreglo);
       console.log(a, b, c);
     }
     if (this.id == 4) { // Exponencial
       var a: number = this.formulario.value.numero;
       var b: number = this.formulario.value.escala;
-      //this.crearGrafico(this.generarPuntos(this.id,a,b));
+      this.arreglo = this.generarPuntos(this.id,a,b);
+      this.quitarRepeticion(this.arreglo);
       console.log(a, b);
     }
     if (this.id == 5) { // f
       var a: number = this.formulario.value.numero;
       var b: number = this.formulario.value.g1;
       var c: number = this.formulario.value.g2;
-      // this.crearGrafico(this.generarPuntos(this.id,a,b,c));
+      this.arreglo = this.generarPuntos(this.id,a,b,c);
+      this.quitarRepeticion(this.arreglo);
       console.log(a, b, c);
     }
     if (this.id == 6) { // beta
@@ -132,28 +138,32 @@ export class DistribucionComponent implements OnInit {
       var b: number = this.formulario.value.alfa;
       var c: number = this.formulario.value.beta;
       var d: number = this.formulario.value.localizacion;
-      //this.crearGrafico(this.generarPuntos(this.id,a,b,c,d));
+      this.arreglo = this.generarPuntos(this.id,a,b,c,d);
+      this.quitarRepeticion(this.arreglo);
       console.log(a, b, c, d);
     }
     if (this.id == 7) { // logaritmica normal
       var a: number = this.formulario.value.numero;
       var b: number = this.formulario.value.Ml;
       var c: number = this.formulario.value.De;
-      //this.crearGrafico(this.generarPuntos(this.id,a,b,c));
+      this.arreglo = this.generarPuntos(this.id,a,b,c);
+      this.quitarRepeticion(this.arreglo);
       console.log(a, b, c);
     }
     if (this.id == 8) { // t student
       var a: number = this.formulario.value.numero;
       var b: number = this.formulario.value.Ml;
       var c: number = this.formulario.value.De;
-      //this.crearGrafico(this.generarPuntos(this.id,a,b,c));
+      this.arreglo = this.generarPuntos(this.id,a,b,c);
+      this.quitarRepeticion(this.arreglo);
       console.log(a, b, c);
     }
     if (this.id == 9) { // empirica
       var a: number = this.formulario.value.numero;
       var b: number = this.formulario.value.Ml;
       var c: number = this.formulario.value.De;
-      //this.crearGrafico(this.generarPuntos(this.id,a,b,c));
+      this.arreglo = this.generarPuntos(this.id,a,b,c);
+      this.quitarRepeticion(this.arreglo);
       console.log(a, b, c);
     }
 
@@ -224,7 +234,10 @@ export class DistribucionComponent implements OnInit {
     }
   }
 
-  public crearGrafico(ejeY: any[], datos: any[]) {
+  public crearGrafico(ejeY: any[],ejeX: any[], datos: any[]) {
+    for (let i = 0; i < ejeX.length; i++) {
+      this.lineChartLabels.push(ejeX[i]);
+    }
     this.lineChartData = [
       { data: ejeY, label: 'muestra' }]
     this.datos = datos;
@@ -237,23 +250,70 @@ export class DistribucionComponent implements OnInit {
     var valor = [];
     switch (e) {
       case 1:
-        return valor = PD.rpois(a, b);
+        valor = PD.rpois(a, b);
+        for (let i = 0; i < valor.length; i++) {
+          valor[i] = Number(valor[i].toFixed(2));
+        }
+        return valor;
+
       case 2:
-        return valor = PD.rnorm(a, b, c);
+        valor = PD.rnorm(a, b, c);
+        for(let i=0 ; i<valor.length;i++){
+          valor[i]= Number(valor[i].toFixed(2));
+        }
+        return valor;
+
       case 3:
-        return valor = PD.rgamma(a, b, c);
+        valor = PD.rgamma(a, b, c);
+        for(let i=0 ; i<valor.length;i++){
+          valor[i]= Number(valor[i].toFixed(2));
+        }
+        return valor;
+
       case 4:
-        return valor = PD.rexp(a, b);
+        valor = PD.rexp(a, b);
+        for(let i=0 ; i<valor.length;i++){
+          valor[i]= Number(valor[i].toFixed(2));
+        }
+        return valor;
+
       case 5:
-        return valor = PD.rf(a, b, c);
+        valor = PD.rf(a, b, c);
+        for(let i=0 ; i<valor.length;i++){
+          valor[i]= Number(valor[i].toFixed(2));
+        }
+        return valor;
+
       case 6:
-        return valor = PD.rbeta(a, b, c, d);
-      case 7:
-        return valor = PD.rlnorm(a, b, c);
+        valor = PD.rbeta(a, b, c, d);
+        for(let i=0 ; i<valor.length;i++){
+          valor[i]= Number(valor[i].toFixed(2));
+        }
+        return valor;
+
+  case 7:
+        valor = PD.rlnorm(a, b, c);
+        for(let i=0 ; i<valor.length;i++){
+          valor[i]= Number(valor[i].toFixed(2));
+        }
+        return valor;
+
       case 8:
-        return valor = PD.rlnorm(a, b, c);
+        valor = PD.rlnorm(a, b, c);
+        for(let i=0 ; i<valor.length;i++){
+          valor[i]= Number(valor[i].toFixed(2));
+        }
+        return valor;
+
       case 9:
-        return valor = PD.rlnorm(a, b, c);
+        valor = PD.rlnorm(a, b, c);
+        for(let i=0 ; i<valor.length;i++){
+          valor[i]= Number(valor[i].toFixed(2));
+        }
+        return valor;
+
+      default:
+        break;
     }
   }
 
