@@ -12,7 +12,6 @@ Npm install
 
 Actualmente soportado
 ------------------------------------------------------------------------------------------------------------------------
-Distribución binomial
 
 Distribución beta
 
@@ -28,10 +27,6 @@ Distribución normal (gaussiana)
 
 Distribución de poisson (no se recomienda para lambda> 100)
 
-Muestra (mezclar una matriz o seleccionar elementos utilizando la matriz opcional de pesos)
-
-Distribución uniforme (con opción de entropía para el uniforme estándar)
-
-Uniforme limitado a números enteros
+Muestra
 
 Visualización (muestra los valores de una variable aleatoria en un bucle animado)
