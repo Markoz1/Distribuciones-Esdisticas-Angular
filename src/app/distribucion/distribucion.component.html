@@ -108,17 +108,26 @@
 							</div>
 							<div class="panel-body">
 								<div class="">
-									<div class="">
-										<div style="display: block;">
-											<canvas baseChart
-                              [datasets]="lineChartData"
-                              [labels]="lineChartLabels"
-                              [options]="lineChartOptions"
-                              [colors]="lineChartColors"
-											        [legend]="lineChartLegend"
-                              [chartType]="lineChartType">
-											</canvas>
-										</div>
+									<div style="display: block;">
+										<canvas baseChart 
+										[datasets]="lineChartData" 
+										[labels]="lineChartLabels" 
+										[options]="lineChartOptions" 
+										[colors]="lineChartColors"
+										[legend]="lineChartLegend" 
+										[chartType]="lineChartType">
+										</canvas>
+									</div>
+									<hr SIZE=7 NOSHADE>
+									<div style="display: block;">
+										<canvas baseChart 
+										[datasets]="lineChartData" 
+										[labels]="lineChartLabels" 
+										[options]="lineChartOptions" 
+										[colors]="lineChartColors"
+										[legend]="lineChartLegend" 
+										[chartType]="barChartType">
+										</canvas>
 									</div>
 								</div>
 							</div>
