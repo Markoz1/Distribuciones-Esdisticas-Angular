@@ -1,17 +1,17 @@
 # Distribuciones-Esdisticas-Angular
 
 Taller De Simulacion De Sistemas
-
+-------------------------------------------------------------------------------------------------------------------------
 Biblioteca de distribuciones de probabilidad para JavaScript
 
 Funciones para el muestreo de variables aleatorias a partir de distribuciones de probabilidad. Utiliza los mismos nombres de función que R.
 
 Instalación
-
-Npm install 
 ------------------------------------------------------------------------------------------------------------------------
-Actualmente soportado
+Npm install 
 
+Actualmente soportado
+------------------------------------------------------------------------------------------------------------------------
 Distribución binomial
 
 Distribución beta
@@ -33,7 +33,5 @@ Muestra (mezclar una matriz o seleccionar elementos utilizando la matriz opciona
 Distribución uniforme (con opción de entropía para el uniforme estándar)
 
 Uniforme limitado a números enteros
-
-Palabras (generar palabras aleatorias de una biblioteca de caracteres)
 
 Visualización (muestra los valores de una variable aleatoria en un bucle animado)
