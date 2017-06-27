@@ -11,7 +11,6 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { Distribucion } from './distribucion';
 import { DISTRIBUCIONES } from './lista-distribucion';
 import { DistribucionService } from './distribucion.service';
-import { forEach } from "@angular/router/src/utils/collection";
 
 @Component({
   selector: 'app-distribucion',
