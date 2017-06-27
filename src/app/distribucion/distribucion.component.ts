@@ -116,7 +116,7 @@ export class DistribucionComponent implements OnInit {
       this.crearGrafico(PD.rf(a, b, c));
       console.log(a, b, c);
     }
-    if (this.id == 6) { // f
+    if (this.id == 6) { // beta
       var a: number = this.formulario.value.numero;
       var b: number = this.formulario.value.alfa;
       var c: number = this.formulario.value.beta;
@@ -134,7 +134,7 @@ export class DistribucionComponent implements OnInit {
     if (this.id == 8) { // t student
       var a: number = this.formulario.value.numero;
       var b: number = this.formulario.value.Ml;
-      var c: number = this.formulario.value.De;
+      var c: number = this.formulario.value.De;   
       this.crearGrafico(PD.rlnorm(a, b, c));
       console.log(a, b, c);
     }
@@ -208,30 +208,30 @@ export class DistribucionComponent implements OnInit {
         numero: new FormControl(this.distribucion.getDatos()[0]),
         Ml: new FormControl(this.distribucion.getDatos()[1]),
         De: new FormControl(this.distribucion.getDatos()[2]),
-      });   
-  }
-}
-
-  public crearGrafico(datos: any[]) {
-  this.lineChartData = [
-    { data: datos, label: 'muestra' },]
-  this.datos = datos;
-}
-  public randomize(): void {
-  let _lineChartData: Array<any> = new Array(this.lineChartData.length);
-  for(let i = 0; i < this.lineChartData.length; i++) {
-    _lineChartData[i] = {
-      data: new Array(this.lineChartData[i].data.length),
-      label: this.lineChartData[i].label
-    };
-    for (let j = 0; j < this.lineChartData[i].data.length; j++) {
-      _lineChartData[i].data[j] = Math.floor((Math.random() * 100) + 1);
+      });
     }
   }
+
+  public crearGrafico(datos: any[]) {
+    this.lineChartData = [
+      { data: datos, label: 'muestra' },]
+    this.datos = datos;
+  }
+  public randomize(): void {
+    let _lineChartData: Array<any> = new Array(this.lineChartData.length);
+    for (let i = 0; i < this.lineChartData.length; i++) {
+      _lineChartData[i] = {
+        data: new Array(this.lineChartData[i].data.length),
+        label: this.lineChartData[i].label
+      };
+      for (let j = 0; j < this.lineChartData[i].data.length; j++) {
+        _lineChartData[i].data[j] = Math.floor((Math.random() * 100) + 1);
+      }
+    }
     this.lineChartData = _lineChartData;
-}
+  }
   // events
   public chartClicked(e: any): void {
-  console.log(e);
-}
+    console.log(e);
+  }
 }
