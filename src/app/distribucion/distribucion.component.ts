@@ -11,7 +11,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { Distribucion } from './distribucion';
 import { DISTRIBUCIONES } from './lista-distribucion';
 import { DistribucionService } from './distribucion.service';
-import {forEach} from "@angular/router/src/utils/collection";
+import { forEach } from "@angular/router/src/utils/collection";
 
 @Component({
   selector: 'app-distribucion',
@@ -90,24 +90,24 @@ export class DistribucionComponent implements OnInit {
   }
 
   public calcularFuncion() {
-    if(this.lineChartLabels.length >0){
-      this.lineChartLabels= [];
+    if (this.lineChartLabels.length > 0) {
+      this.lineChartLabels = [];
     }
     if (this.id == 1) { // poison
       var a: number = this.formulario.value.numero;
       var b: number = this.formulario.value.media;
-      let arreglo = this.generarPuntos(this.id,a,b);
+      let arreglo = this.generarPuntos(this.id, a, b);
       let ejeX: Array<any> = ordenar(Unico.unique(arreglo));
-      let ejeY: Array<any> = new Array<any> (ejeX.length);
+      let ejeY: Array<any> = new Array<any>(ejeX.length);
 
-      for(let x=0 ; x < ejeX.length; x++){
-        ejeY[x]=(Repeticiones(arreglo, ejeX[x]));
+      for (let x = 0; x < ejeX.length; x++) {
+        ejeY[x] = (Repeticiones(arreglo, ejeX[x]));
       }
-      for(let i=0; i<ejeX.length; i++) {
-         this.lineChartLabels.push(ejeX[i]);
+      for (let i = 0; i < ejeX.length; i++) {
+        this.lineChartLabels.push(ejeX[i]);
       }
-      console.log("&&&&&&&&&&&&&&&&&&&&&&&&&"+this.lineChartLabels.valueOf()+"----------------------------------");
-      console.log("x "+ejeX, "y="+ejeY, "are= "+arreglo);
+      console.log("&&&&&&&&&&&&&&&&&&&&&&&&&" + this.lineChartLabels.valueOf() + "----------------------------------");
+      console.log("x " + ejeX, "y=" + ejeY, "are= " + arreglo);
       console.log(ejeX, ejeY, arreglo);
       console.log(a, b);
       this.crearGrafico(ejeY, arreglo);
@@ -116,7 +116,7 @@ export class DistribucionComponent implements OnInit {
       var a: number = this.formulario.value.numero;
       var b: number = this.formulario.value.media;
       var c: number = this.formulario.value.sd;
-     // this.crearGrafico(this.generarPuntos(this.id,a,b,c));
+      // this.crearGrafico(this.generarPuntos(this.id,a,b,c));
       console.log(a, b, c);
     }
     if (this.id == 3) { // Gamma
@@ -136,7 +136,7 @@ export class DistribucionComponent implements OnInit {
       var a: number = this.formulario.value.numero;
       var b: number = this.formulario.value.g1;
       var c: number = this.formulario.value.g2;
-     // this.crearGrafico(this.generarPuntos(this.id,a,b,c));
+      // this.crearGrafico(this.generarPuntos(this.id,a,b,c));
       console.log(a, b, c);
     }
     if (this.id == 6) { // f
@@ -235,42 +235,41 @@ export class DistribucionComponent implements OnInit {
       });
     }
   }
-}
 
-  public crearGrafico(ejeY:any[], datos:any) {
-  this.lineChartData = [
-    { data: ejeY, label: 'muestra' }]
-  this.datos = datos;
+  public crearGrafico(ejeY: any[], datos: any) {
+    this.lineChartData = [
+      { data: ejeY, label: 'muestra' }]
+    this.datos = datos;
 
-}
+  }
 
   // events
   public chartClicked(e: any): void {
-  console.log(e);
-}
-  public generarPuntos(e: number, a = 0, b = 0,c=0,d =0){
-    var valor =[];
-    switch (e){
+    console.log(e);
+  }
+  public generarPuntos(e: number, a = 0, b = 0, c = 0, d = 0) {
+    var valor = [];
+    switch (e) {
       case 1:
-        return  valor = PD.rpois(a, b);
+        return valor = PD.rpois(a, b);
       case 2:
-        return  valor = PD.rnorm(a, b, c);
+        return valor = PD.rnorm(a, b, c);
       case 3:
-        return  valor = PD.rgamma(a, b, c);
+        return valor = PD.rgamma(a, b, c);
       case 4:
-        return  valor = PD.rexp(a, b);
+        return valor = PD.rexp(a, b);
       case 5:
-        return  valor = PD.rf(a, b, c);
+        return valor = PD.rf(a, b, c);
       case 6:
-        return  valor = PD.rbeta(a, b, c, d);
+        return valor = PD.rbeta(a, b, c, d);
       case 7:
-        return  valor = PD.rlnorm(a, b, c);
+        return valor = PD.rlnorm(a, b, c);
       case 8:
-        return  valor = PD.rlnorm(a, b, c);
+        return valor = PD.rlnorm(a, b, c);
       case 9:
-        return  valor = PD.rlnorm(a, b, c);
+        return valor = PD.rlnorm(a, b, c);
     }
-}
+  }
 
 }
 
