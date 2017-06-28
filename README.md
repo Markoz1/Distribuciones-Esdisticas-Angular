@@ -30,3 +30,6 @@ Distribución de poisson (no se recomienda para lambda> 100)
 Muestra
 
 Visualización (muestra los valores de una variable aleatoria en un bucle animado)
+-------------------------
+Para más información vea el manual de usuario en el siguiente link:
+https://drive.google.com/file/d/0B7s0sLcgT1l8b1ZISFV0V3hCeFE/view?usp=sharing
