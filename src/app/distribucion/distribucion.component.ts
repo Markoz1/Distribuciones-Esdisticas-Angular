@@ -272,14 +272,14 @@ export class DistribucionComponent implements OnInit {
       case 4:
         valor = PD.rexp(a, b);
         for(let i=0 ; i<valor.length;i++){
-          valor[i]= Number(valor[i].toFixed(2));
+          valor[i]= Number(valor[i].toFixed(1));
         }
         return valor;
 
       case 5:
         valor = PD.rf(a, b, c);
         for(let i=0 ; i<valor.length;i++){
-          valor[i]= Number(valor[i].toFixed(2));
+          valor[i]= Number(valor[i].toFixed(1));
         }
         return valor;
 
@@ -293,7 +293,7 @@ export class DistribucionComponent implements OnInit {
   case 7:
         valor = PD.rlnorm(a, b, c);
         for(let i=0 ; i<valor.length;i++){
-          valor[i]= Number(valor[i].toFixed(2));
+          valor[i]= Number(valor[i].toFixed(1));
         }
         return valor;
 
