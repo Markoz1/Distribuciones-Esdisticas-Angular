@@ -1,1 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:hover,
+.nav-pills > li.active > a:focus {
+  background-color: #009688;
+}
+.list-group-item.active > .badge,
+.nav-pills > .active > a > .badge {
+  color: #009688;
+}

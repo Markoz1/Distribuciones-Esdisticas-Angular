@@ -15,8 +15,8 @@ var normal: Distribucion = new Normal(2, "Normal", 1000, 5, 2);
 var gamma: Distribucion = new Gamma(3, "Gamma", 100, 0.5, 20);
 var exponencial: Distribucion = new Exponencial(4, "Exponencial", 150, 0.7);
 var f: Distribucion = new F(5, "f", 350, 2, 5);
-var beta: Distribucion = new Beta(6, "Beta", 0, 0, 0, 0);
-var logNormal: Distribucion = new LogNormal(7, "Logaritmica Normal", 100, 3, 2);
+var beta: Distribucion = new Beta(6, "Beta", 100, 0.1, 0.6, 9);
+var logNormal: Distribucion = new LogNormal(7, "Logaritmica Normal", 1000, 0, 1);
 var tStudent: Distribucion = new TStudent(8, "T-student", 100, 3, 2);
 var empirica: Distribucion = new Empirica(9, "Empirica", 100, 3, 2);
 

@@ -22,7 +22,7 @@
 											<!--Formulario Poisson-->
 											<div *ngIf="id == 1">
 												<div class="form-group">
-													<label for="media">Media</label>
+													<label for="media">Lambda</label>
 													<input type="number" name="media" class="form-control" formControlName="media" step="any" required>
 												</div>
 											</div>
@@ -107,28 +107,39 @@
 								<h3 class="panel-title">Grafico</h3>
 							</div>
 							<div class="panel-body">
+                <ul class="nav nav-pills nav-justified" style="margin-bottom: 15px;">
+                  <li class="active"><a href="#home" data-toggle="tab">Grafica Lineal</a></li>
+                  <li><a href="#profile" data-toggle="tab">Grafica de Barras</a></li>
+                </ul>
+                <div id="myTabContent" class="tab-content">
+                  <div class="tab-pane fade active in" id="home">
+                    <div style="display: block;">
+                      <canvas baseChart
+                              [datasets]="lineChartData"
+                              [labels]="lineChartLabels"
+                              [options]="lineChartOptions"
+                              [colors]="lineChartColors"
+                              [legend]="lineChartLegend"
+                              [chartType]="lineChartType">
+                      </canvas>
+                    </div>
+                  </div>
+                  <div class="tab-pane fade" id="profile">
+                    <div style="display: block;">
+                      <canvas baseChart
+                              [datasets]="lineChartData"
+                              [labels]="lineChartLabels"
+                              [options]="lineChartOptions"
+                              [colors]="lineChartColors"
+                              [legend]="lineChartLegend"
+                              [chartType]="barChartType">
+                      </canvas>
+                    </div>
+                  </div>
+                </div>
 								<div class="">
-									<div style="display: block;">
-										<canvas baseChart
-										[datasets]="lineChartData"
-										[labels]="lineChartLabels"
-										[options]="lineChartOptions"
-										[colors]="lineChartColors"
-										[legend]="lineChartLegend"
-										[chartType]="lineChartType">
-										</canvas>
-									</div>
-									<hr SIZE=7 NOSHADE>
-									<div style="display: block;">
-										<canvas baseChart
-										[datasets]="lineChartData"
-										[labels]="lineChartLabels"
-										[options]="lineChartOptions"
-										[colors]="lineChartColors"
-										[legend]="lineChartLegend"
-										[chartType]="barChartType">
-										</canvas>
-									</div>
+
+
 								</div>
 							</div>
 						</div>
@@ -145,6 +156,11 @@
 									</div>
 								</div>
 							</div>
+              <div class="panel-footer">
+                <div class="text-center">
+                  <button large type="submit" class="btn btn-primary">Imprimir Reporte</button>
+                </div>
+              </div>
 						</div>
 					</div>
 				</div>
