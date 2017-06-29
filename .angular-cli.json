@@ -29,7 +29,8 @@
         "../node_modules/bootstrap/dist/js/bootstrap.min.js",
         "../node_modules/bootstrap-material-design/dist/js/material.min.js",
         "../node_modules/bootstrap-material-design/dist/js/ripples.min.js",
-        "assets/js/material-init.js"
+        "assets/js/material-init.js",
+        "../node_modules/jspdf/dist/jspdf.min.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {
