@@ -1,4 +1,4 @@
-# Distribuciones-Esdisticas-Angular
+# Distribuciones-Estadisticas-Angular
 
 Taller De Simulacion De Sistemas
 -------------------------------------------------------------------------------------------------------------------------
@@ -31,5 +31,8 @@ Muestra
 
 Visualización (muestra los valores de una variable aleatoria en un bucle animado)
 -------------------------
-Para más información vea el manual de usuario en el siguiente link:
-https://drive.google.com/file/d/0B7s0sLcgT1l8b1ZISFV0V3hCeFE/view?usp=sharing
+Para más información:
+
+Manual de Usuario: https://drive.google.com/file/d/0B7s0sLcgT1l8b1ZISFV0V3hCeFE/view?usp=sharing
+
+Manual Tecnico: https://drive.google.com/file/d/0BypQPDdtr0JBRFZ0TlRqLUZWWTQ/view?usp=sharing
