@@ -5,12 +5,14 @@ import * as PD from '../../../node_modules/probability-distributions';
 import * as Unico from '../../../node_modules/npm-array-unique';
 import * as Repeticiones from '../../../node_modules/array-occurrence';
 import * as ordenar from '../../../node_modules/sort-numbers';
+import * as jsPDF from 'jspdf';
 
 import { ActivatedRoute, Params } from '@angular/router';
 
 import { Distribucion } from './distribucion';
 import { DISTRIBUCIONES } from './lista-distribucion';
 import { DistribucionService } from './distribucion.service';
+
 
 @Component({
   selector: 'app-distribucion',
@@ -24,7 +26,9 @@ export class DistribucionComponent implements OnInit {
   public lineChartData: Array<any>;
   public id: number;
   public lineChartLabels: Array<any>;
-  public arreglo : any[];
+  public arreglo: any[];
+  public ejeX: any[];
+  public ejeY: any[];
   public lineChartOptions: any = {
     responsive: true
   };
@@ -58,10 +62,11 @@ export class DistribucionComponent implements OnInit {
   public lineChartType: string = 'line';
   public barChartType: string = 'bar';
   public formulario;
+
   constructor(private distribucionService: DistribucionService, private route: ActivatedRoute) {
     this.lineChartLabels = new Array<any>();
     this.lineChartData = [
-      { data: [], label: 'muestra' },]
+      {data: [], label: 'muestra'},]
   }
 
 
@@ -80,13 +85,14 @@ export class DistribucionComponent implements OnInit {
     this.llenarFormulario();
   }
 
-  public quitarRepeticion(arreglo: any[]){
-  let ejeX = ordenar(Unico.unique(arreglo));
-  let ejeY = new Array<any>(ejeX.length);
-    for (let x = 0; x < arreglo.length; x++) {
-      ejeY[x] = (Repeticiones(arreglo, ejeX[x]));
+  public quitarRepeticion(arreglo: any[]) {
+    this.ejeX = ordenar(Unico.unique(arreglo));
+    this.ejeY = new Array<any>(this.ejeX.length);
+    for (let x = 0; x < this.ejeX.length; x++) {
+      this.ejeY[x] = (Repeticiones(arreglo, this.ejeX[x]));
     }
-    this.crearGrafico(ejeY, ejeX , arreglo);
+    this.crearGrafico(this.ejeY, this.ejeX, arreglo);
+    console.log(this.ejeY);
   }
 
   public calcularFuncion() {
@@ -105,7 +111,7 @@ export class DistribucionComponent implements OnInit {
       var a: number = this.formulario.value.numero;
       var b: number = this.formulario.value.media;
       var c: number = this.formulario.value.sd;
-      this.arreglo = this.generarPuntos(this.id,a,b,c);
+      this.arreglo = this.generarPuntos(this.id, a, b, c);
       this.quitarRepeticion(this.arreglo);
       console.log(a, b, c);
     }
@@ -113,14 +119,14 @@ export class DistribucionComponent implements OnInit {
       var a: number = this.formulario.value.numero;
       var b: number = this.formulario.value.forma;
       var c: number = this.formulario.value.escala;
-      this.arreglo =this.generarPuntos(this.id,a,b,c);
+      this.arreglo = this.generarPuntos(this.id, a, b, c);
       this.quitarRepeticion(this.arreglo);
       console.log(a, b, c);
     }
     if (this.id == 4) { // Exponencial
       var a: number = this.formulario.value.numero;
       var b: number = this.formulario.value.escala;
-      this.arreglo = this.generarPuntos(this.id,a,b);
+      this.arreglo = this.generarPuntos(this.id, a, b);
       this.quitarRepeticion(this.arreglo);
       console.log(a, b);
     }
@@ -128,7 +134,7 @@ export class DistribucionComponent implements OnInit {
       var a: number = this.formulario.value.numero;
       var b: number = this.formulario.value.g1;
       var c: number = this.formulario.value.g2;
-      this.arreglo = this.generarPuntos(this.id,a,b,c);
+      this.arreglo = this.generarPuntos(this.id, a, b, c);
       this.quitarRepeticion(this.arreglo);
       console.log(a, b, c);
     }
@@ -137,7 +143,7 @@ export class DistribucionComponent implements OnInit {
       var b: number = this.formulario.value.alfa;
       var c: number = this.formulario.value.beta;
       var d: number = this.formulario.value.localizacion;
-      this.arreglo = this.generarPuntos(this.id,a,b,c,d);
+      this.arreglo = this.generarPuntos(this.id, a, b, c, d);
       this.quitarRepeticion(this.arreglo);
       console.log(a, b, c, d);
     }
@@ -145,7 +151,7 @@ export class DistribucionComponent implements OnInit {
       var a: number = this.formulario.value.numero;
       var b: number = this.formulario.value.Ml;
       var c: number = this.formulario.value.De;
-      this.arreglo = this.generarPuntos(this.id,a,b,c);
+      this.arreglo = this.generarPuntos(this.id, a, b, c);
       this.quitarRepeticion(this.arreglo);
       console.log(a, b, c);
     }
@@ -153,7 +159,7 @@ export class DistribucionComponent implements OnInit {
       var a: number = this.formulario.value.numero;
       var b: number = this.formulario.value.Ml;
       var c: number = this.formulario.value.De;
-      this.arreglo = this.generarPuntos(this.id,a,b,c);
+      this.arreglo = this.generarPuntos(this.id, a, b, c);
       this.quitarRepeticion(this.arreglo);
       console.log(a, b, c);
     }
@@ -161,7 +167,7 @@ export class DistribucionComponent implements OnInit {
       var a: number = this.formulario.value.numero;
       var b: number = this.formulario.value.Ml;
       var c: number = this.formulario.value.De;
-      this.arreglo = this.generarPuntos(this.id,a,b,c);
+      this.arreglo = this.generarPuntos(this.id, a, b, c);
       this.quitarRepeticion(this.arreglo);
       console.log(a, b, c);
     }
@@ -233,18 +239,20 @@ export class DistribucionComponent implements OnInit {
     }
   }
 
-  public crearGrafico(ejeY: any[],ejeX: any[], datos: any[]) {
+  public crearGrafico(ejeY: any[], ejeX: any[], datos: any[]) {
     for (let i = 0; i < ejeX.length; i++) {
       this.lineChartLabels.push(ejeX[i]);
     }
     this.lineChartData = [
-      { data: ejeY, label: 'muestra' }]
+      {data: ejeY, label: 'muestra'}]
     this.datos = datos;
   }
+
   // events
   public chartClicked(e: any): void {
     console.log(e);
   }
+
   public generarPuntos(e: number, a = 0, b = 0, c = 0, d = 0) {
     var valor = [];
     switch (e) {
@@ -257,63 +265,107 @@ export class DistribucionComponent implements OnInit {
 
       case 2:
         valor = PD.rnorm(a, b, c);
-        for(let i=0 ; i<valor.length;i++){
-          valor[i]= Number(valor[i].toFixed(2));
+        for (let i = 0; i < valor.length; i++) {
+          valor[i] = Number(valor[i].toFixed(2));
         }
         return valor;
 
       case 3:
         valor = PD.rgamma(a, b, c);
-        for(let i=0 ; i<valor.length;i++){
-          valor[i]= Number(valor[i].toFixed(2));
+        for (let i = 0; i < valor.length; i++) {
+          valor[i] = Number(valor[i].toFixed(2));
         }
         return valor;
 
       case 4:
         valor = PD.rexp(a, b);
-        for(let i=0 ; i<valor.length;i++){
-          valor[i]= Number(valor[i].toFixed(1));
+        for (let i = 0; i < valor.length; i++) {
+          valor[i] = Number(valor[i].toFixed(1));
         }
         return valor;
 
       case 5:
         valor = PD.rf(a, b, c);
-        for(let i=0 ; i<valor.length;i++){
-          valor[i]= Number(valor[i].toFixed(1));
+        for (let i = 0; i < valor.length; i++) {
+          valor[i] = Number(valor[i].toFixed(1));
         }
         return valor;
 
       case 6:
         valor = PD.rbeta(a, b, c, d);
-        for(let i=0 ; i<valor.length;i++){
-          valor[i]= Number(valor[i].toFixed(2));
+        for (let i = 0; i < valor.length; i++) {
+          valor[i] = Number(valor[i].toFixed(2));
         }
         return valor;
 
-  case 7:
+      case 7:
         valor = PD.rlnorm(a, b, c);
-        for(let i=0 ; i<valor.length;i++){
-          valor[i]= Number(valor[i].toFixed(1));
+        for (let i = 0; i < valor.length; i++) {
+          valor[i] = Number(valor[i].toFixed(1));
         }
         return valor;
 
       case 8:
         valor = PD.rlnorm(a, b, c);
-        for(let i=0 ; i<valor.length;i++){
-          valor[i]= Number(valor[i].toFixed(2));
+        for (let i = 0; i < valor.length; i++) {
+          valor[i] = Number(valor[i].toFixed(2));
         }
         return valor;
 
       case 9:
         valor = PD.rlnorm(a, b, c);
-        for(let i=0 ; i<valor.length;i++){
-          valor[i]= Number(valor[i].toFixed(2));
+        for (let i = 0; i < valor.length; i++) {
+          valor[i] = Number(valor[i].toFixed(2));
         }
         return valor;
 
       default:
         break;
     }
+  }
+
+  public archpdf() {
+    window.print();
+    /*var columns = ["ID", "Name", "Country"];
+     var rows = [
+     [1, "Shaw", "Tanzania", ],
+     [2, "Nelson", "Kazakhstan", ],
+     [3, "Garcia", "Madagascar", ]
+
+     ];
+
+     // Only pt supported (not mm or in)
+     var doc = new jsPDF('p', 'pt');
+     doc.autoTable(columns, rows);
+     doc.save('table.pdf');
+     */
+    /*
+    var doc = jsPDF()
+    doc.setFontSize(22)
+    doc.text(20, 20, 'This is a title')
+
+    doc.setFontSize(16)
+    doc.text(20, 30, 'This is some normal sized text underneath.')
+    */
+
+
+
+    /*
+    var doc = new jsPDF();
+    doc.text(35, 25, '                  Datos Generados');
+    doc.text(20, 35, 'Nro         |         Dato       |        Ocurrencia');
+    var k=0;
+    var l;
+    //doc.text(20, 35, this.arreglo.toString());
+    for(l=1; l<50 ;l++){
+
+      doc.text(20,40+k,l.toLocaleString()+"        |         "+ this.ejeX[l].toString()+ "         |         "+ this.ejeY[l].toString());
+      k=k+5;
+    }
+    //doc.addPage(); //siguente página
+
+    // Save the PDF
+    doc.save('datos.pdf'); */
   }
 
 }
